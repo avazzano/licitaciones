@@ -4,11 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.licitacion.model.Usuario;
+import com.licitacion.model.Persona;
 
-public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
+public interface PersonaRepository extends JpaRepository<Persona,Long>{
 
-	Optional<Usuario> findByUsername(String username);
+	Persona findByUsername(String username);
 
 	Boolean existsByUsername(String username);
 

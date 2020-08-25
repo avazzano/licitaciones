@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class VehiculoResource {
 	
 	
 	@GetMapping("{id}")
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Obtener Vehiculo por id")
 	public ResponseEntity<Vehiculo> getVehiculo(@PathVariable long id) {
 		 
@@ -53,7 +55,8 @@ public class VehiculoResource {
 	}
 	
 	
-	@GetMapping("")
+	@GetMapping
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Obtener Vehiculo por filtro")
 	public ResponseEntity<List<Vehiculo>> getVehiculo(){
 
@@ -65,6 +68,7 @@ public class VehiculoResource {
 	
 	
 	@PostMapping
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Alta Vehiculo ")
 	public ResponseEntity<String> addVehiculo(@RequestBody Vehiculo vehiculo){
 		
@@ -75,6 +79,7 @@ public class VehiculoResource {
 	
 	
 	@PutMapping
+	@Secured({"ROLE_ADMIN"})
 	@ApiOperation(value = "Modificacion Vehiculo ")
 	public ResponseEntity<String> updateVehiculo(@RequestBody Vehiculo vehiculo){
 		
@@ -83,9 +88,10 @@ public class VehiculoResource {
 		return ResponseEntity.ok("OK");
 	}
 	
-	
-	@ApiOperation(value = "Alta Foto para Vehiculo ")
+		
 	@PostMapping("photos/add")
+	@Secured({"ROLE_ADMIN"})
+	@ApiOperation(value = "Alta Foto para Vehiculo ")
 	public ResponseEntity<String> addPhoto( @RequestParam("id") String idVehiculo, @RequestParam("title") String title, 
 	  @RequestParam("image") MultipartFile image, Model model) 
 	  throws IOException {
@@ -95,18 +101,22 @@ public class VehiculoResource {
 	    return ResponseEntity.ok("OK");
 	}
 	
-	@ApiOperation(value = "Get fotos para Vehiculo ")
+	
 	@GetMapping("{id}/photos")
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ResponseBody
+	@ApiOperation(value = "Get fotos para Vehiculo ")
 	public ResponseEntity<List<String>> getPhotosID(@PathVariable long id){		
 	    
 		return ResponseEntity.ok(photoService.getFotosIds(id));
 	 
 	}
 	
-	@ApiOperation(value = "Get foto")
+
 	@GetMapping(value="photos/{id}")
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ResponseBody
+	@ApiOperation(value = "Get foto")
 	public HttpEntity<byte[]> getPhoto(@PathVariable String id, Model model) {
 	    Photo photo = photoService.getPhoto(id);
 

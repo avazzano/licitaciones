@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,18 +31,18 @@ public class OfertaResource {
 	private OfertaService ofertaService;
 	
 	@GetMapping("{idLicitacion}/{idVehiculo}")
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Obtener ofertas por licitacion y vehiculo")
 	public ResponseEntity<List<Oferta>> getOferta(@PathVariable long idLicitacion, @PathVariable long idVehiculo) {
 		 
-		
 		List<Oferta> ofertas= ofertaService.getOfertas(idLicitacion,idVehiculo);
-			
-				
+		
 		return ResponseEntity.ok(ofertas);
 	}
 	
 	
 	@PostMapping
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Alta Oferta ")
 	public ResponseEntity<String> addOferta(@RequestBody OfertaDto dto){
 		

@@ -1,11 +1,9 @@
 package com.licitacion.service;
 
-import com.licitacion.model.Usuario;
+import com.licitacion.model.Persona;
 
-public interface UsuarioService  extends GenericService<Usuario> {
+public interface UsuarioService {
 
-	
-	public Usuario findByUsername(String username);
-	
-	public Usuario update(Usuario usuario, Long id);
+	Persona findByUsername(String username);
+
 }

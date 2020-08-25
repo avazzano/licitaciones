@@ -23,7 +23,7 @@ public class Oferta {
 	private Vehiculo vehiculo;
 	
 	@OneToOne
-	private Usuario usuario;
+	private Persona usuario;
 
 	@OneToOne
 	private Licitacion licitacion;
@@ -55,10 +55,10 @@ public class Oferta {
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
-	public Usuario getUsuario() {
+	public Persona getUsuario() {
 		return usuario;
 	}
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Persona usuario) {
 		this.usuario = usuario;
 	}
 	public Licitacion getLicitacion() {

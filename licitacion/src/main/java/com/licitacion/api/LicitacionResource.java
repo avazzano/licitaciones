@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,6 +33,7 @@ public class LicitacionResource {
 	private LicitacionService licitacionService;
 	
 	@GetMapping("{id}")
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Obtener Licitacitacion por id")
 	public ResponseEntity<Licitacion> getLicitacion(@PathVariable long id) {
 		 
@@ -42,6 +44,7 @@ public class LicitacionResource {
 	
 	
 	@GetMapping("")
+	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@ApiOperation(value = "Obtener persona por filtro")
 	public ResponseEntity<List<Licitacion>> getLicitacion(){
 
@@ -53,6 +56,7 @@ public class LicitacionResource {
 	
 	
 	@PostMapping
+	@Secured({"ROLE_ADMIN"})
 	@ApiOperation(value = "Alta licitacion")
 	public ResponseEntity<String> addLicitacion(@RequestBody Licitacion licitacion){
 		
@@ -64,6 +68,7 @@ public class LicitacionResource {
 	
 	
 	@PutMapping
+	@Secured({"ROLE_ADMIN"})
 	@ApiOperation(value = "Modificacion licitacion")
 	public ResponseEntity<String> uodateLicitacion(@RequestBody Licitacion licitacion){
 		
@@ -75,6 +80,7 @@ public class LicitacionResource {
 	
 	
 	@PatchMapping("{id}/addVehiculo")
+	@Secured({"ROLE_ADMIN"})
 	@ApiOperation(value = "Agrega vehiculo a licitacion")
 	public ResponseEntity<String> addVehiculo(@PathVariable long id, @RequestBody List<Long> vehiculos){
 		
@@ -83,10 +89,5 @@ public class LicitacionResource {
 		return  ResponseEntity.ok("OK");
 		
 	}
-	
-	
-	
-	
-	
 	
 }
