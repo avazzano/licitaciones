@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  mysql8:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    restart: always
+    environment: 
+      MYSQL_DATABASE: licitacionesDB
+      MYSQL_ROOT_PASSWORD: sasa
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: licitaciones
+    ports:
+      - 27017:27017
+
